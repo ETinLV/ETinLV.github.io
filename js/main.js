@@ -26,8 +26,17 @@ function main() {
             }
         });
 
-        function wscroll(e) {
-
+        function wscroll(link) {
+            if (location.pathname.replace(/^\//,'') == link.pathname.replace(/^\//,'') && location.hostname == link.hostname) {
+                var target = $(link.hash);
+                target = target.length ? target : $('[name=' + link.hash.slice(1) +']');
+            if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top - 40
+                    }, 900);
+                    return false;
+                }
+            }
         }
 
         /*====================================
